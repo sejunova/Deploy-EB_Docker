@@ -1,0 +1,31 @@
+html, body {
+    font-size: 11px;
+}
+ul, ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+img.img-post {
+    width: 100%;
+}
+img.img-profile {
+    width: 50%;
+}
+#profile-text{
+    background-color: black;
+}
+.post .panel-body {
+    padding: 0;
+    margin: 0;
+}
+.post .panel-body .body-content {
+    padding: 10px;
+}
+.comment-form {
+    width: 450px;
+}
+
+.border-none {
+    border: none;
+}
