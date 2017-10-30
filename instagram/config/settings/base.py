@@ -12,29 +12,28 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import json
 import os
 
-# instagram_project/instagram/
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#instagram_project/
+# paths
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ROOT_DIR = os.path.dirname(BASE_DIR)
-#instagram_project/.config_secret/
 CONFIG_SECRET_DIR = os.path.join(ROOT_DIR, '.config_secret')
-#instagram_project/instagram/media/
+
+#Media paths
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-#instagram_project/instagram/static/
+
+#Static paths
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
-#instagram_project/instagram/templates/
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')
 
 
 with open(os.path.join(CONFIG_SECRET_DIR, 'settings_common.json')) as json_data:
     config_secret_common = json.load(json_data)
-    SECRET_KEY = config_secret_common['django']['secret_key']
-    DATABASES = config_secret_common['django']['databases']
+    #SECRET_KEY = config_secret_common['django']['secret_key']
+    #DATABASES = config_secret_common['django']['databases']
 
     #AWS
     AWS_ACCESS_KEY_ID = config_secret_common['aws']['AWS_ACCESS_KEY_ID']
@@ -54,21 +53,9 @@ FACEBOOK_APP_ID = config_secret_common['facebook']['app_id']
 FACEBOOK_APP_SECRET_CODE = config_secret_common['facebook']['secret_code']
 FACEBOOK_SCOPE = ['user_friends', 'public_profile', 'email']
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    '.ap-northeast-2.compute.amazonaws.com',
-    '.isj.co.kr',
-]
-
 
 # Application definition
 
@@ -99,6 +86,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+#Template
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -119,16 +108,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-
-
-
-# Password validation
-# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
-
 AUTH_USER_MODEL = 'member.User'
 LOGIN_URL = 'member:login'
 
@@ -148,18 +127,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'ko-kr'
-
 TIME_ZONE = 'Asia/Seoul'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
-#배포를 위한 static모음
-STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')

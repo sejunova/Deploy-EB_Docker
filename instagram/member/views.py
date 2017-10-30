@@ -1,16 +1,11 @@
-import json
-from pprint import pprint
 from typing import NamedTuple
-
-
-from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout as django_logout, login as django_login
 import requests
 from django.urls import reverse
-
-from config.settings import FACEBOOK_APP_ID, FACEBOOK_APP_SECRET_CODE, FACEBOOK_SCOPE
+from config.settings.base import FACEBOOK_APP_ID, FACEBOOK_APP_SECRET_CODE, FACEBOOK_SCOPE
 from member.decorators import login_required
 from .forms import SignUpForm, LoginForm
 
