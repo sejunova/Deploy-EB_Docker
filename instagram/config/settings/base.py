@@ -18,7 +18,7 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 CONFIG_SECRET_DIR = os.path.join(ROOT_DIR, '.config_secret')
 
 #Media paths
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(ROOT_DIR, '.media')
 MEDIA_URL = '/media/'
 
 #Static paths
@@ -29,24 +29,13 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')
 
+#config paths
+CONFIG_SECRET_DIR = os.path.join(ROOT_DIR, '.config_secret')
+CONFIG_SECRET_COMMON = os.path.join(CONFIG_SECRET_DIR, 'settings_common')
+CONFIG_SECRET_DEV = os.path.join(CONFIG_SECRET_DIR, 'settings_dev')
+CONFIG_SECRET_DEPLOY = os.path.join(CONFIG_SECRET_DIR, 'settings_deploy')
 
-with open(os.path.join(CONFIG_SECRET_DIR, 'settings_common.json')) as json_data:
-    config_secret_common = json.load(json_data)
-    #SECRET_KEY = config_secret_common['django']['secret_key']
-    #DATABASES = config_secret_common['django']['databases']
-
-    #AWS
-    AWS_ACCESS_KEY_ID = config_secret_common['aws']['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = config_secret_common['aws']['AWS_SECRET_ACCESS_KEY']
-    AWS_STORAGE_BUCKET_NAME = config_secret_common['aws']['AWS_STORAGE_BUCKET_NAME']
-
-# S3 FileStorage
-DEFAULT_FILE_STORAGE = 'config.storages.MediaStorage'
-STATICFILES_STORAGE = 'config.storages.StaticStorage'
-
-#S3 static directory customize
-STATICFILES_LOCATION = 'static'
-MEDIAFILES_LOCATION = 'media'
+config_secret_common = json.loads(open(CONFIG_SECRET_COMMON).read())
 
 #Facebook related configuration
 FACEBOOK_APP_ID = config_secret_common['facebook']['app_id']
