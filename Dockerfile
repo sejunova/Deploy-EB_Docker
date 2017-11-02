@@ -1,4 +1,4 @@
-FROM base
+FROM sejun/base
 MAINTAINER sejun425@gmail.com
 
 ENV LANG C.UTF-8
