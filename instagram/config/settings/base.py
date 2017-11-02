@@ -31,9 +31,9 @@ STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')
 
 #config paths
 CONFIG_SECRET_DIR = os.path.join(ROOT_DIR, '.config_secret')
-CONFIG_SECRET_COMMON = os.path.join(CONFIG_SECRET_DIR, 'settings_common')
-CONFIG_SECRET_DEV = os.path.join(CONFIG_SECRET_DIR, 'settings_dev')
-CONFIG_SECRET_DEPLOY = os.path.join(CONFIG_SECRET_DIR, 'settings_deploy')
+CONFIG_SECRET_COMMON = os.path.join(CONFIG_SECRET_DIR, 'settings_common.json')
+CONFIG_SECRET_DEV = os.path.join(CONFIG_SECRET_DIR, 'settings_dev.json')
+CONFIG_SECRET_DEPLOY = os.path.join(CONFIG_SECRET_DIR, 'settings_deploy.json')
 
 config_secret_common = json.loads(open(CONFIG_SECRET_COMMON).read())
 
