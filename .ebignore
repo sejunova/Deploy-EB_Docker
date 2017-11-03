@@ -1,9 +1,4 @@
-!.config_secret
-
 .idea/
-.config_secret/
-
-
 
 
 # Created by https://www.gitignore.io/api/linux,macos,python,django,pycharm
