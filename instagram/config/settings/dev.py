@@ -3,7 +3,7 @@ from .base import *
 
 ALLOWED_HOSTS = [
     '.elasticbeanstalk.com',
-    '.isj.co.kr',
+    'api.isj.co.kr',
     'localhost',
 ]
 
