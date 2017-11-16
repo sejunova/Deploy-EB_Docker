@@ -5,6 +5,7 @@ ALLOWED_HOSTS = [
     '.elasticbeanstalk.com',
     'api.isj.co.kr',
     'localhost',
+    '172.31.6.226',
 ]
 
 config_secret_dev = json.loads(open(CONFIG_SECRET_DEV).read())
