@@ -4,6 +4,7 @@ from .base import *
 ALLOWED_HOSTS = [
     '.elasticbeanstalk.com',
     '.isj.co.kr',
+    'localhost',
 ]
 
 config_secret_dev = json.loads(open(CONFIG_SECRET_DEV).read())

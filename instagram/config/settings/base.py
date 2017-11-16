@@ -58,6 +58,10 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'storages',
+    'rest_framework',
+    'rest_framework.authtoken',
+
+    'corsheaders',
 
     'post',
     'member',
@@ -96,6 +100,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'member.backends.FacebookBackend',
+]
 
 AUTH_USER_MODEL = 'member.User'
 LOGIN_URL = 'member:login'
