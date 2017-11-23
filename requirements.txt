@@ -1,7 +1,7 @@
-awsebcli==3.12.0
+awsebcli==3.12.1
 blessed==1.14.2
 boto3==1.4.7
-botocore==1.7.36
+botocore==1.7.45
 cement==2.8.2
 certifi==2017.7.27.1
 chardet==3.0.4
@@ -35,6 +35,7 @@ Pygments==2.2.0
 python-dateutil==2.6.1
 pytz==2017.2
 PyYAML==3.12
+raven==6.3.0
 requests==2.9.1
 s3transfer==0.1.11
 semantic-version==2.5.0
