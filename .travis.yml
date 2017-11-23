@@ -6,7 +6,8 @@ install:
 before_script:
 - cd instagram
 script:
-- pytest
+- python manage.py test
 before_install:
 - openssl aes-256-cbc -K $encrypted_5b6a986da04e_key -iv $encrypted_5b6a986da04e_iv
   -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar
