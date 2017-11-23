@@ -17,7 +17,7 @@ User = get_user_model()
 
 
 class PostListViewTest(APILiveServerTestCase):
-    URL_API_POST_LIST_NAME = 'api-post'
+    URL_API_POST_LIST_NAME = 'api:post:post-list'
     URL_API_POST_LIST = '/apis/post/'
     VIEW = PostList
 
@@ -35,7 +35,7 @@ class PostListViewTest(APILiveServerTestCase):
 
     def test_post_list_url_resolve(self):
         resolver_match = resolve(self.URL_API_POST_LIST)
-        self.assertEqual(resolver_match.url_name, self.URL_API_POST_LIST_NAME)
+        self.assertEqual(resolver_match.view_name, self.URL_API_POST_LIST_NAME)
         self.assertEqual(resolver_match.func.view_class, self.VIEW)
 
     def test_get_post_list(self):
@@ -47,10 +47,10 @@ class PostListViewTest(APILiveServerTestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Post.objects.count(), num)
-        self.assertEqual(len(response.data), num)
+        self.assertEqual(response.data['count'], num)
 
-        for i in range(num):
-            cur_post_data = response.data[i]
+        for i in range(len(response.data['results'])):
+            cur_post_data = response.data['results'][i]
             self.assertIn('id', cur_post_data)  # 왜 나는 'id'? 왜냐하면 serializer에 id라고 했으니까!
             self.assertIn('author', cur_post_data)
             self.assertIn('photo', cur_post_data)
@@ -66,19 +66,7 @@ class PostListViewTest(APILiveServerTestCase):
             self.create_post(author=user)
 
         response = self.client.get(self.URL_API_POST_LIST)
-        self.assertEqual(len(response.data), num_posts)
-
-    # def test_create_post(self):
-    #     user = self.create_user(username='dummy')
-    #     factory = APIRequestFactory()
-    #     f = self.generate_photo_file()
-    #     request = factory.post(self.URL_API_POST_LIST,
-    #                            {'photo':f, 'created_at':datetime.now()})
-    #     force_authenticate(request, user=user)
-    #
-    #     view = PostList.as_view()
-    #     response = view(request)
-    #     self.assertTrue(response.data, Post.objects.last())
+        self.assertEqual(response.data['count'], num_posts)
 
     def test_create_post(self):
         user = self.create_user(username='dummy')
