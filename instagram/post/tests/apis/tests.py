@@ -30,7 +30,7 @@ class PostListViewTest(APILiveServerTestCase):
         return Post.objects.create(author=author, photo=File(io.BytesIO()))
 
     def test_post_list_url(self):
-        url = reverse(self.URL_API_POST_LIST_NAME)
+        url = reverse('list')
         self.assertEqual(url, self.URL_API_POST_LIST)
 
     def test_post_list_url_resolve(self):
