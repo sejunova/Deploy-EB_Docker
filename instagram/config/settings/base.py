@@ -11,17 +11,18 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 import json
 import os
+import raven
 
 # paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ROOT_DIR = os.path.dirname(BASE_DIR)
 CONFIG_SECRET_DIR = os.path.join(ROOT_DIR, '.config_secret')
 
-#Media paths
+# Media paths
 MEDIA_ROOT = os.path.join(ROOT_DIR, '.media')
 MEDIA_URL = '/media/'
 
-#Static paths
+# Static paths
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -29,7 +30,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')
 
-#config paths
+# config paths
 CONFIG_SECRET_DIR = os.path.join(ROOT_DIR, '.config_secret')
 CONFIG_SECRET_COMMON = os.path.join(CONFIG_SECRET_DIR, 'settings_common.json')
 CONFIG_SECRET_DEV = os.path.join(CONFIG_SECRET_DIR, 'settings_dev.json')
@@ -37,11 +38,10 @@ CONFIG_SECRET_DEPLOY = os.path.join(CONFIG_SECRET_DIR, 'settings_deploy.json')
 
 config_secret_common = json.loads(open(CONFIG_SECRET_COMMON).read())
 
-#Facebook related configuration
+# Facebook related configuration
 FACEBOOK_APP_ID = config_secret_common['facebook']['app_id']
 FACEBOOK_APP_SECRET_CODE = config_secret_common['facebook']['secret_code']
 FACEBOOK_SCOPE = ['user_friends', 'public_profile', 'email']
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -63,6 +63,8 @@ INSTALLED_APPS = [
 
     'corsheaders',
 
+    'raven.contrib.django.raven_compat',
+
     'post',
     'member',
 ]
@@ -79,7 +81,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-#Template
+# Template
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
@@ -124,7 +126,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3001',
+)
+RAVEN_CONFIG = {
+    'dsn': 'https://14223119b0d64591b8c4ccdc11061c0f:a3ba4c92fb4b4796bf70157a3c6461e8@sentry.io/248306',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+}
 
 LANGUAGE_CODE = 'ko-kr'
 TIME_ZONE = 'Asia/Seoul'
